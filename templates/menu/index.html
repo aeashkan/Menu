@@ -1,0 +1,156 @@
+{% load static %} {% load custom_filters %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>منوی رستوران</title>
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        />
+    </head>
+    <body>
+        <div class="decorative-pattern"></div>
+        <div class="coffee-bean-cluster left">
+            <div class="coffee-bean-decor"></div>
+            <div class="coffee-bean-decor"></div>
+            <div class="coffee-bean-decor"></div>
+        </div>
+        <div class="coffee-bean-cluster right">
+            <div class="coffee-bean-decor"></div>
+            <div class="coffee-bean-decor"></div>
+            <div class="coffee-bean-decor"></div>
+        </div>
+        <header>
+            <div class="main-header">
+                <div class="header-content">
+                    <img
+                        src="{% static 'img/heart-coffee.png' %}"
+                        alt="قهوه و شکلات سیاوش"
+                        class="header-logo"
+                    />
+                    <div class="header-title">
+                        <span class="brand">قهوه و شکلات</span>
+                        <span class="brand-name">سیاوش</span>
+                    </div>
+                    <div class="header-contact">
+                        <span
+                            ><i class="fab fa-instagram"></i>
+                            Cafe_siavaash</span
+                        >
+                        <span dir="ltr" style="direction: ltr; text-align: left"
+                            ><i class="fab fa-whatsapp"></i> 0910 875 2555</span
+                        >
+                    </div>
+                </div>
+            </div>
+        </header>
+        <nav class="navbar">
+            <div class="nav-links">
+                <a href="#" class="active">منو</a>
+            </div>
+        </nav>
+
+        <main>
+            <div class="menu-container">
+                <div class="menu-categories">
+                    {% for category in categories %}
+                    <button
+                        class="category-btn"
+                        data-category="{{ category.id }}"
+                    >
+                        <div class="category-image">
+                            <img
+                                src="{{ category.image.url }}"
+                                alt="{{ category.name }}"
+                            />
+                        </div>
+                        <i class="fas {{ category.icon }}"></i>
+                        <span>{{ category.name }}</span>
+                    </button>
+                    {% endfor %}
+                </div>
+
+                <div class="menu-items">
+                    <div class="category-header">
+                        <h2 class="category-title">منوی ما</h2>
+                        <div class="category-nav">
+                            {% for category in categories %}
+                            <button
+                                class="category-nav-btn"
+                                data-category="{{ category.id }}"
+                            >
+                                <i class="fas {{ category.icon }}"></i>
+                                {{ category.name }}
+                            </button>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="menu-grid">
+                        {% for category, items in items_by_category.items %}
+                        <div
+                            class="category-section"
+                            id="category-{{ category.id }}"
+                        >
+                            <div class="category-section-header">
+                                <h2 class="section-title">
+                                    <i class="fas {{ category.icon }}"></i>
+                                    {{ category.name }}
+                                </h2>
+                            </div>
+                            <div class="items-grid">
+                                {% for item in items %}
+                                <div class="menu-item">
+                                    <div class="item-image">
+                                        <img
+                                            src="{{ item.image.url }}"
+                                            alt="{{ item.name }}"
+                                            loading="lazy"
+                                        />
+                                    </div>
+                                    <div class="item-info">
+                                        <h3>{{ item.name }}</h3>
+                                        <p class="description">
+                                            {{ item.description }}
+                                        </p>
+                                        <p class="price">
+                                            <span class="price-value"
+                                                >{{ item.price }}</span
+                                            >
+                                            <span class="currency">تومان</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="footer-content">
+                <div class="social-links">
+                    <a
+                        href="https://instagram.com/Cafe_siavaash"
+                        target="_blank"
+                        ><i class="fab fa-instagram"></i
+                    ></a>
+                    <a href="https://t.me/09108752555" target="_blank"
+                        ><i class="fab fa-telegram"></i
+                    ></a>
+                    <a href="https://wa.me/989108752555" target="_blank"
+                        ><i class="fab fa-whatsapp"></i
+                    ></a>
+                </div>
+                <!-- <p>تمامی حقوق محفوظ است © ۱۴۰۳</p> -->
+            </div>
+        </footer>
+
+        <script src="{% static 'js/script.js' %}"></script>
+    </body>
+</html>
